@@ -1,12 +1,30 @@
 local wezterm = require('wezterm')
 local config = wezterm.config_builder()
 
-config.color_scheme = 'NvimLight'
 config.hide_tab_bar_if_only_one_tab = false
 config.tab_bar_at_bottom = true
 config.use_fancy_tab_bar = false
 config.font = wezterm.font("Iosevka Term")
 config.font_size = 22.0
+
+local function set_theme(appearance)
+    if appearance:find("Dark") then
+        return "NvimDark"
+    else
+        return "NvimLight"
+    end
+end
+
+wezterm.on("window-config-reloaded", function(window, pane)
+    local overrides = window:get_config_overrides() or {}
+    local appearance = window:get_appearance()
+
+    local scheme = set_theme(appearance)
+    if overrides.color_scheme ~= scheme then
+        overrides.color_scheme = scheme
+        window:set_config_overrides(overrides)
+    end
+end)
 
 config.keys = {
     { key = "!", mods = "CTRL|SHIFT", action = wezterm.action.ActivateTab(0) },
