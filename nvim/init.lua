@@ -11,6 +11,8 @@ vim.o.expandtab = true
 vim.o.cursorline = true
 vim.o.colorcolumn = "80,100,120"
 vim.o.signcolumn = "yes"
+vim.g.mapleader = " "
+vim.o.wrap = false
 
 -- keymaps
 local map = vim.api.nvim_set_keymap
