@@ -1,7 +1,13 @@
 local wezterm = require('wezterm')
 local config = wezterm.config_builder()
 
-config.color_scheme = 'Wez'
+config.color_scheme = 'NvimLight'
+config.hide_tab_bar_if_only_one_tab = false
+config.tab_bar_at_bottom = true
+config.use_fancy_tab_bar = false
+config.font = wezterm.font("Iosevka Term")
+config.font_size = 22.0
+
 config.keys = {
     { key = "!", mods = "CTRL|SHIFT", action = wezterm.action.ActivateTab(0) },
     { key = '"', mods = "CTRL|SHIFT", action = wezterm.action.ActivateTab(1) },
