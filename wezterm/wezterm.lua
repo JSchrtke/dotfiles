@@ -46,6 +46,7 @@ config.keys = {
     { key = "g", mods = "CTRL|SHIFT", action = wezterm.action.ShowLauncherArgs({ flags = "FUZZY|WORKSPACES" })},
     { key = "S", mods = "CTRL|SHIFT", action = wezterm.action { SplitVertical = { domain = "CurrentPaneDomain" } } },
     { key = "V", mods = "CTRL|SHIFT", action = wezterm.action { SplitHorizontal = { domain = "CurrentPaneDomain" } } },
+    { key = "o", mods = "CTRL|SHIFT", action = wezterm.action.TogglePaneZoomState },
     {
         key = 'A',
         mods = 'CTRL|SHIFT',
