@@ -52,4 +52,3 @@ vim.lsp.config['lua'] = {
 vim.lsp.enable('lua')
 
 vim.cmd("colorscheme default")
-vim.o.bg="light"
