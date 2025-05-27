@@ -52,3 +52,29 @@ vim.lsp.config['lua'] = {
 vim.lsp.enable('lua')
 
 vim.cmd("colorscheme default")
+vim.lsp.config['gopls'] = {
+	cmd = { "gopls" },
+	filetypes = { "go" },
+	root_markers = {
+        "go.mod",
+        ".git",
+    },
+}
+vim.lsp.enable("gopls")
+
+vim.lsp.config['rust-analyzer'] = {
+	cmd = { "rust-analyzer" },
+	filetypes = { "rust" },
+	root_markers = {
+        "Cargo.toml",
+        ".git",
+    },
+}
+vim.lsp.enable("rust-analyzer")
+
+vim.lsp.config['tsserver'] = {
+	cmd = { "npx", "typescript-language-server", "--stdio" },
+	filetypes = { "javascript", "typescript" },
+	root_markers = { "package.json", ".git" },
+}
+vim.lsp.enable("tsserver")
