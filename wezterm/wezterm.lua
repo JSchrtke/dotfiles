@@ -9,7 +9,7 @@ config.font_size = 22.0
 
 local function set_theme(appearance)
     if appearance:find("Dark") then
-        return "NvimDark"
+        return "Zenburn"
     else
         return "NvimLight"
     end
