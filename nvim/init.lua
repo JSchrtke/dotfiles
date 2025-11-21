@@ -51,7 +51,8 @@ vim.lsp.config['lua'] = {
 }
 vim.lsp.enable('lua')
 
-vim.cmd("colorscheme default")
+vim.cmd("colorscheme zenburn")
+
 vim.lsp.config['gopls'] = {
 	cmd = { "gopls" },
 	filetypes = { "go" },
