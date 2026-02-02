@@ -5,7 +5,7 @@ config.hide_tab_bar_if_only_one_tab = false
 config.tab_bar_at_bottom = true
 config.use_fancy_tab_bar = false
 config.font = wezterm.font("Iosevka Term")
-config.font_size = 22.0
+config.font_size = 18.0
 
 local function set_theme(appearance)
     if appearance:find("Dark") then
