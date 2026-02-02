@@ -13,6 +13,7 @@ vim.o.colorcolumn = "80,100,120"
 vim.o.signcolumn = "yes"
 vim.g.mapleader = " "
 vim.o.wrap = false
+vim.o.foldlevelstart = 99
 
 -- keymaps
 local map = vim.api.nvim_set_keymap
@@ -51,7 +52,7 @@ vim.lsp.config['lua'] = {
 }
 vim.lsp.enable('lua')
 
-vim.cmd("colorscheme zenburn")
+vim.cmd("colorscheme melange")
 
 vim.lsp.config['gopls'] = {
 	cmd = { "gopls" },
@@ -79,3 +80,20 @@ vim.lsp.config['tsserver'] = {
 	root_markers = { "package.json", ".git" },
 }
 vim.lsp.enable("tsserver")
+
+require('nvim-treesitter').install({
+    'c', 'vim', 'lua', 'go', 'javascript', 'typescript', 'html', 'css', 'rust'
+})
+
+vim.api.nvim_create_autocmd('FileType', {
+    pattern = { 'vim', 'lua', 'go' },
+    callback = function()
+        -- syntax highlighting, provided by Neovim
+        vim.treesitter.start()
+        -- folds, provided by Neovim
+        vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+        vim.wo.foldmethod = 'expr'
+        -- indentation, provided by nvim-treesitter
+        vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+    end,
+})
