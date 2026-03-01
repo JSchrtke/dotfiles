@@ -1,12 +1,12 @@
-vim.o.number=true
-vim.o.relativenumber=true
-vim.o.grepprg="rg --vimgrep"
-vim.o.clipboard="unnamedplus"
+vim.o.number = true
+vim.o.relativenumber = true
+vim.o.grepprg = "rg --vimgrep"
+vim.o.clipboard = "unnamedplus"
 vim.o.listchars = "tab:-->,eol:↲,nbsp:␣,space:•,trail:•,extends:⟩,precedes:⟨"
 vim.o.ignorecase = true
 vim.o.smartcase = true
-vim.o.tabstop = 4
-vim.o.shiftwidth = 4
+vim.o.tabstop = 8
+vim.o.shiftwidth = 8
 vim.o.expandtab = true
 vim.o.cursorline = true
 vim.o.colorcolumn = "80,100,120"
@@ -30,70 +30,80 @@ map("n", "[e", ":lua vim.diagnostic.goto_prev({ severity = vim.diagnostic.severi
 
 -- lsp config
 vim.lsp.config['lua'] = {
-    cmd = { 'lua-language-server' },
-    filetypes = { 'lua' },
-    settings = {
-        Lua = {
-            diagnostics = {
-                globals = { 'vim' }
-            }
+        cmd = { 'lua-language-server' },
+        filetypes = { 'lua' },
+        settings = {
+                Lua = {
+                        diagnostics = {
+                                globals = { 'vim' }
+                        }
+                },
         },
-    },
-    root_markers = {
-        '.luarc.json',
-        '.luarc.jsonc',
-        '.luacheckrc',
-        '.stylua.toml',
-        'stylua.toml',
-        'selene.toml',
-        'selene.yml',
-        '.git',
-    },
+        root_markers = {
+                '.luarc.json',
+                '.luarc.jsonc',
+                '.luacheckrc',
+                '.stylua.toml',
+                'stylua.toml',
+                'selene.toml',
+                'selene.yml',
+                '.git',
+        },
 }
 vim.lsp.enable('lua')
 
 vim.cmd("colorscheme melange")
 
 vim.lsp.config['gopls'] = {
-	cmd = { "gopls" },
-	filetypes = { "go" },
-	root_markers = {
-        "go.mod",
-        ".git",
-    },
+        cmd = { "gopls" },
+        filetypes = { "go" },
+        root_markers = {
+                "go.mod",
+                ".git",
+        },
 }
 vim.lsp.enable("gopls")
 
 vim.lsp.config['rust-analyzer'] = {
-	cmd = { "rust-analyzer" },
-	filetypes = { "rust" },
-	root_markers = {
-        "Cargo.toml",
-        ".git",
-    },
+        cmd = { "rust-analyzer" },
+        filetypes = { "rust" },
+        root_markers = {
+                "Cargo.toml",
+                ".git",
+        },
 }
 vim.lsp.enable("rust-analyzer")
 
 vim.lsp.config['tsserver'] = {
-	cmd = { "npx", "typescript-language-server", "--stdio" },
-	filetypes = { "javascript", "typescript" },
-	root_markers = { "package.json", ".git" },
+        cmd = { "npx", "typescript-language-server", "--stdio" },
+        filetypes = { "javascript", "typescript" },
+        root_markers = { "package.json", ".git" },
 }
 vim.lsp.enable("tsserver")
 
-require('nvim-treesitter').install({
-    'c', 'vim', 'lua', 'go', 'javascript', 'typescript', 'html', 'css', 'rust'
-})
+local treesitter_filetypes = {
+        'bash',
+        'c',
+        'cpp',
+        'css',
+        'go',
+        'html',
+        'javascript',
+        'lua',
+        'rust',
+        'scss',
+        'typescript',
+        'vim',
+}
+require('nvim-treesitter').install(treesitter_filetypes)
 
-vim.api.nvim_create_autocmd('FileType', {
-    pattern = { 'vim', 'lua', 'go' },
-    callback = function()
-        -- syntax highlighting, provided by Neovim
+local start_treesitter = function()
         vim.treesitter.start()
-        -- folds, provided by Neovim
         vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
         vim.wo.foldmethod = 'expr'
-        -- indentation, provided by nvim-treesitter
         vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
-    end,
+end
+vim.api.nvim_create_autocmd('FileType', {
+        pattern = treesitter_filetypes,
+        callback = start_treesitter,
 })
