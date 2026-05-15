@@ -52,7 +52,7 @@ vim.lsp.config['lua'] = {
 }
 vim.lsp.enable('lua')
 
-vim.cmd("colorscheme melange")
+vim.cmd("colorscheme zenbones")
 
 vim.lsp.config['gopls'] = {
         cmd = { "gopls" },

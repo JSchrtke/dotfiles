@@ -9,7 +9,7 @@ config.font_size = 18.0
 
 local function set_theme(appearance)
     if appearance:find("Dark") then
-        return "melange_dark"
+        return "zenbones"
     else
         return "melange_light"
     end
