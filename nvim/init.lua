@@ -1,5 +1,3 @@
-vim.o.number = true
-vim.o.relativenumber = true
 vim.o.grepprg = "rg --vimgrep"
 vim.o.clipboard = "unnamedplus"
 vim.o.listchars = "tab:-->,eol:↲,nbsp:␣,space:•,trail:•,extends:⟩,precedes:⟨"
