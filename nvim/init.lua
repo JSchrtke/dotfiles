@@ -81,6 +81,7 @@ vim.lsp.config['tsserver'] = {
 }
 vim.lsp.enable("tsserver")
 
+vim.pack.add({"https://github.com/nvim-treesitter/nvim-treesitter"})
 local treesitter_filetypes = {
         'bash',
         'c',
@@ -90,6 +91,7 @@ local treesitter_filetypes = {
         'html',
         'javascript',
         'lua',
+        'php',
         'rust',
         'scss',
         'typescript',
