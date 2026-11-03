@@ -26,6 +26,8 @@ map("n", "sad", ":lua vim.diagnostic.setqflist({ title = 'Diagnostics' })<CR>", 
 map("n", "se", ":lua vim.diagnostic.setqflist({ title = 'Errors', severity = vim.diagnostic.severity.ERROR })<CR>", {})
 map("n", "]e", ":lua vim.diagnostic.goto_next({ severity = vim.diagnostic.severity.ERROR })<CR>", {})
 map("n", "[e", ":lua vim.diagnostic.goto_prev({ severity = vim.diagnostic.severity.ERROR })<CR>", {})
+-- autocomplete
+map("i", "<C-space>", "<C-x><C-o>", {})
 
 
 -- lsp config
@@ -80,6 +82,43 @@ vim.lsp.config['tsserver'] = {
         root_markers = { "package.json", ".git" },
 }
 vim.lsp.enable("tsserver")
+
+vim.lsp.config("laravel_lsp", {
+    cmd = { "laravel-lsp" },
+    filetypes = { "php", "blade" },
+    root_dir = function(bufnr, on_dir)
+        local root = vim.fs.root(bufnr, "artisan")
+
+        if root then
+            on_dir(root)
+        end
+    end,
+})
+vim.lsp.enable("laravel_lsp")
+
+vim.lsp.config("intelephense", {
+  cmd = { 'intelephense', '--stdio' },
+  filetypes = { 'php' },
+  root_markers = { '.git', 'composer.json' },
+  settings = {
+    intelephense = {
+      telemetry = {
+        enabled = false,
+      },
+    },
+  },
+})
+vim.lsp.enable("intelephense")
+
+vim.lsp.config("vscode-json-language-server", {
+        cmd = {"vscode-json-language-server", "--stdio"},
+        filetypes = {"json", "jsonc"},
+        root_markers = {".git"},
+        init_options = {
+                provideFormatter = true,
+        },
+})
+vim.lsp.enable("vscode-json-language-server")
 
 vim.pack.add({"https://github.com/nvim-treesitter/nvim-treesitter"})
 local treesitter_filetypes = {
